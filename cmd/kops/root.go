@@ -55,7 +55,7 @@ var (
 	root_long = templates.LongDesc(i18n.T(`
 	kops is Kubernetes ops.
 
-	kops is the easiest way to get a production grade Kubernetes cluster up and running.
+	kops22 is the easiest way to get a production grade Kubernetes cluster up and running.
 	We like to think of it as kubectl for clusters.
 
 	kops helps you create, destroy, upgrade and maintain production-grade, highly available,
