@@ -59,6 +59,7 @@ type CreateClusterOptions struct {
 	NodeSize             string
 	MasterSize           string
 	MasterCount          int32
+	NodeMaxPrice         string
 	NodeCount            int32
 	MasterVolumeSize     int32
 	NodeVolumeSize       int32
@@ -242,6 +243,7 @@ func NewCmdCreateCluster(f *util.Factory, out io.Writer) *cobra.Command {
 
 	cmd.Flags().Int32Var(&options.MasterCount, "master-count", options.MasterCount, "Set the number of masters.  Defaults to one master per master-zone")
 	cmd.Flags().Int32Var(&options.NodeCount, "node-count", options.NodeCount, "Set the number of nodes")
+	cmd.Flags().StringVar(&options.NodeMaxPrice, "node-price", options.NodeMaxPrice, "Set spot max price for nodes")
 	cmd.Flags().BoolVar(&options.EncryptEtcdStorage, "encrypt-etcd-storage", options.EncryptEtcdStorage, "Generate key in aws kms and use it for encrypt etcd volumes")
 
 	cmd.Flags().StringVar(&options.Image, "image", options.Image, "Image to use for all instances.")
@@ -532,6 +534,15 @@ func RunCreateCluster(f *util.Factory, out io.Writer, c *CreateClusterOptions) e
 		}
 	}
 
+	
+	if c.NodeMaxPrice != "" {
+		for _, group := range nodes {
+			group.Spec.NodeMaxPrice = c.NodeMaxPrice
+		}
+	}
+	
+	
+	
 	if c.Image != "" {
 		for _, group := range instanceGroups {
 			group.Spec.Image = c.Image
