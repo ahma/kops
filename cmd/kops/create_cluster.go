@@ -530,7 +530,7 @@ func RunCreateCluster(f *util.Factory, out io.Writer, c *CreateClusterOptions) e
 
 	if c.NodeSize != "" {
 		for _, group := range nodes {
-			group.Spec.MachineType = c.NodeSize
+			group.Spec.MachineType = &c.NodeSize
 		}
 	}
 
