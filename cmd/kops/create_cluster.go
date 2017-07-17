@@ -530,14 +530,14 @@ func RunCreateCluster(f *util.Factory, out io.Writer, c *CreateClusterOptions) e
 
 	if c.NodeSize != "" {
 		for _, group := range nodes {
-			group.Spec.MachineType = &c.NodeSize
+			group.Spec.MachineType = c.NodeSize
 		}
 	}
 
 	
 	if c.MaxPrice != "" {
 		for _, group := range nodes {
-			group.Spec.MaxPrice = c.MaxPrice
+			group.Spec.MaxPrice = &c.MaxPrice
 		}
 	}
 	
