@@ -61,7 +61,7 @@ type CreateClusterOptions struct {
 	MasterCount          int32
 	MaxPrice             string
 	NodeMaxCount         int32
-	NodeMaxCount         int32
+	NodeMinCount         int32
 	MasterVolumeSize     int32
 	NodeVolumeSize       int32
 	EncryptEtcdStorage   bool
@@ -243,8 +243,8 @@ func NewCmdCreateCluster(f *util.Factory, out io.Writer) *cobra.Command {
 	cmd.Flags().StringVar(&options.NetworkCIDR, "network-cidr", options.NetworkCIDR, "Set to override the default network CIDR")
 
 	cmd.Flags().Int32Var(&options.MasterCount, "master-count", options.MasterCount, "Set the number of masters.  Defaults to one master per master-zone")
-	cmd.Flags().Int32Var(&options.NodeMaxCount, "node-max-count", options.NodeCount, "Set the maximum number of nodes")
-	cmd.Flags().Int32Var(&options.NodeMinCount, "node-min-count", options.NodeCount, "Set the minimum number of nodes")
+	cmd.Flags().Int32Var(&options.NodeMaxCount, "node-max-count", options.NodeMaxCount, "Set the maximum number of nodes")
+	cmd.Flags().Int32Var(&options.NodeMinCount, "node-min-count", options.NodeMinCount, "Set the minimum number of nodes")
 	cmd.Flags().StringVar(&options.MaxPrice, "node-price", options.MaxPrice, "Set spot max price for nodes")
 	cmd.Flags().BoolVar(&options.EncryptEtcdStorage, "encrypt-etcd-storage", options.EncryptEtcdStorage, "Generate key in aws kms and use it for encrypt etcd volumes")
 
